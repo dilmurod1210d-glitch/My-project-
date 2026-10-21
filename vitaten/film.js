@@ -6,17 +6,18 @@ const T = {
   name: 'Витатен',
   pill: 'MEGAVIT',
   search: 'Қидириш',
-  courseTitle: 'Оила саломатлиги',
-  courseSub: 'Қўлланма · 8 дарс',
+  courseTitle: 'Витатен сиропи',
+  courseSub: 'Мультивитамин · 200 мл',
   prompt: 'Болам учун витамин тавсия қил',
   date: 'Душ 22 июн  9:41',
-  crumb: 'Оила саломатлиги  ›  2-бўлим',
-  title: '2.1 Витатен — бутун оила учун',
+  crumb: 'Мегавит  ›  Сироплар',
+  title: 'Витатен — бутун оила учун',
   bodyA: 'Витатен — шакарсиз мультивитаминли сироп. Болалар ва катталар учун кунлик витаминлар',
   key: 'бир қошиқда.',
-  bodyB: 'Кунига бир марта, овқатдан кейин. 3 ёшдан катта болалар ва катталар учун.',
+  bodyB: 'Шакарсиз, 200 мл. Кунига бир марта, овқатдан кейин — болалар ва катталар учун.',
   cardCap: 'Витатен сиропи',
-  cardSub: 'Шакарсиз · 200 мл · бутун оила учун',
+  cardSub: 'Мультивитаминли · шакарсиз · 200 мл',
+  tagline: 'мультивитаминли сироп',
   c1: 'Иммунитет', c1pill: 'Витамин C',
   c2: 'Энергия', c2pill: 'Витамин B',
   site: 'aksonmegavit.uz',
@@ -157,20 +158,24 @@ const txt = (x, y, s, wt, size, fill, extra = '') => `<text x="${n2(x)}" y="${n2
 function cloud(cx, cy, s, op) {
   return `<g opacity="${op}"><ellipse cx="${cx}" cy="${cy}" rx="${70 * s}" ry="${34 * s}" fill="#fff"/><circle cx="${cx - 30 * s}" cy="${cy - 18 * s}" r="${34 * s}" fill="#fff"/><circle cx="${cx + 18 * s}" cy="${cy - 30 * s}" r="${42 * s}" fill="#fff"/></g>`;
 }
-// family/vitamin art: sky, clouds, hill, a glass syrup bottle with the mark on a blank label
-function artVitaten(x, y, w, h) {
+// the real Vitaten box (photo, 579x1254), standing at bottom-centre bx,by with height h
+const BOX_AR = 579 / 1254;
+function box(bx, by, h, shadow = true) {
+  const w = h * BOX_AR, x = bx - w / 2, y = by - h;
+  return `${shadow ? `<g ${blur(h * 0.03, h * 0.012)}><ellipse cx="${n2(bx)}" cy="${n2(by + h * 0.008)}" rx="${n2(w * 0.62)}" ry="${n2(h * 0.022)}" fill="#0B2A66" opacity=".32"/></g>` : ''}
+<g ${clip(`<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h * 0.006)}"/>`)}>
+<image href="box.png" x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" preserveAspectRatio="none"/>
+<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="${grad([[0, '#FFFFFF', 0.22], [0.18, '#FFFFFF', 0], [0.86, '#0B2A66', 0], [1, '#0B2A66', 0.16]], 0, 0, 1, 0)}"/>
+</g>`;
+}
+// product hero art: sky, clouds, hill and the box standing on it
+function artBox(x, y, w, h) {
   const s = w / 627;
-  const clouds = [0, 1, 2, 3].map(i => cloud(x + w * (0.12 + 0.27 * i + 0.06 * hash(i)), y + h * (0.16 + 0.14 * hash(i + 9)), s * (0.8 + 0.5 * hash(i + 3)), 0.85)).join('');
-  const bx = x + w * 0.5, by = y + h * 0.27, bw = w * 0.27, bh = h * 0.56;
+  const clouds = [0, 1, 2, 3].map(i => cloud(x + w * (0.08 + 0.29 * i + 0.05 * hash(i)), y + h * (0.14 + 0.16 * hash(i + 9)), s * (0.8 + 0.5 * hash(i + 3)), 0.85)).join('');
   return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${grad([[0, '#79B6F2'], [0.65, '#CFE7FF'], [1, '#E9F5FF']])}"/>
 <g ${blur(6 * s)}>${clouds}</g>
-<path d="M${x},${y + h * 0.74} C${x + w * 0.3},${y + h * 0.66} ${x + w * 0.62},${y + h * 0.7} ${x + w},${y + h * 0.64} L${x + w},${y + h} L${x},${y + h} Z" fill="${grad([[0, '#8ED84A'], [1, '#3BAA2E']])}"/>
-<ellipse cx="${bx}" cy="${by + bh + 6 * s}" rx="${bw * 0.62}" ry="${14 * s}" fill="#0B2A66" opacity=".18"/>
-<rect x="${bx - bw * 0.2}" y="${by - bh * 0.17}" width="${bw * 0.4}" height="${bh * 0.13}" rx="${6 * s}" fill="#F4F8FF" stroke="#D5E2F2" stroke-width="${1.5 * s}"/>
-<path d="M${bx - bw * 0.16},${by - bh * 0.04} L${bx + bw * 0.16},${by - bh * 0.04} L${bx + bw * 0.16},${by + bh * 0.04} Q${bx + bw * 0.5},${by + bh * 0.1} ${bx + bw * 0.5},${by + bh * 0.24} L${bx + bw * 0.5},${by + bh * 0.92} Q${bx + bw * 0.5},${by + bh} ${bx + bw * 0.4},${by + bh} L${bx - bw * 0.4},${by + bh} Q${bx - bw * 0.5},${by + bh} ${bx - bw * 0.5},${by + bh * 0.92} L${bx - bw * 0.5},${by + bh * 0.24} Q${bx - bw * 0.5},${by + bh * 0.1} ${bx - bw * 0.16},${by + bh * 0.04} Z" fill="${grad([[0, '#2C86EE'], [1, '#0B44B4']], 0, 0, 1, 0.4)}"/>
-<rect x="${bx - bw * 0.42}" y="${by + bh * 0.36}" width="${bw * 0.84}" height="${bh * 0.42}" rx="${10 * s}" fill="#FFFFFF"/>
-${mark(bx, by + bh * 0.57, bw * 0.5)}
-<path d="M${bx - bw * 0.38},${by + bh * 0.22} L${bx - bw * 0.38},${by + bh * 0.88}" stroke="#fff" stroke-opacity=".35" stroke-width="${8 * s}" stroke-linecap="round"/>`;
+<path d="M${x},${y + h * 0.8} C${x + w * 0.3},${y + h * 0.72} ${x + w * 0.62},${y + h * 0.76} ${x + w},${y + h * 0.7} L${x + w},${y + h} L${x},${y + h} Z" fill="${grad([[0, '#8ED84A'], [1, '#3BAA2E']])}"/>
+${box(x + w * 0.5, y + h * 0.93, h * 0.86)}`;
 }
 function artImmun(x, y, w, h) {
   const balls = [[0.2, 0.3, 0.2, C.lblue], [0.72, 0.26, 0.26, '#FFFFFF'], [0.52, 0.62, 0.17, C.lgreen], [0.88, 0.7, 0.12, C.lblue], [0.1, 0.78, 0.13, '#9CD3FF'], [0.38, 0.12, 0.08, C.lgreen]];
@@ -261,7 +266,7 @@ ${txt(692, 445, T.search, 500, 20, '#9BA9BD')}
 <g opacity=".38"><rect x="505" y="868" width="64" height="64" rx="18" fill="#EEF2F8"/>
 <path d="M521,886 h32 a5,5 0 0 1 5,5 v16 a5,5 0 0 1 -5,5 h-18 l-9,8 v-8 h-5 a5,5 0 0 1 -5,-5 v-16 a5,5 0 0 1 5,-5 z" fill="none" stroke="#6C7A90" stroke-width="3" stroke-linejoin="round"/></g>
 <rect x="764" y="700" width="440" height="560" rx="40" fill="#FFFFFF" stroke="#E6ECF4" filter="url(#softShadow)"/>
-<g ${clip(`<rect x="780" y="716" width="408" height="232" rx="28"/>`)}>${artVitaten(780, 716, 408, 232)}</g>
+<g ${clip(`<rect x="780" y="716" width="408" height="232" rx="28"/>`)}>${artBox(780, 716, 408, 232)}</g>
 ${txt(784, 996, T.courseTitle, 600, 30, '#14181F')}
 ${txt(784, 1034, T.courseSub, 500, 22, '#8D96A5')}
 </g></g>`;
@@ -502,7 +507,7 @@ const S5 = {
     const card = `<g transform="translate(${cx},${n2(cyc)}) scale(${n2(sc)}) translate(${-cx},${n2(-cyc)})">
 <rect x="203" y="${n2(cardTop)}" width="675" height="1100" rx="88" fill="#FFFFFF" filter="url(#softShadow)"/>
 <rect x="504" y="${n2(cardTop + 15)}" width="72" height="9" rx="4.5" fill="#E2E5EA"/>
-<g ${clip(`<rect x="227" y="${n2(top)}" width="627" height="536" rx="64"/>`)}>${artVitaten(227, top, 627, 536)}</g>
+<g ${clip(`<rect x="227" y="${n2(top)}" width="627" height="536" rx="64"/>`)}>${artBox(227, top, 627, 536)}</g>
 ${txt(251, top + 536 + 62, T.cardCap, 600, 38, '#0E0F11')}
 ${txt(251, top + 536 + 100, T.cardSub, 500, 23, '#9AA0AA')}
 </g>`;
@@ -558,7 +563,7 @@ const S6 = {
 };
 
 // ======================================================================
-// S7 f245–300  lone logo disc
+// S7 f245–300  product hero: the Vitaten box (held still f269–287)
 // ======================================================================
 const DT7 = mono([[245, 569], [250, 491], [255, 468], [262, 459], [269, 456]]);
 const S7 = {
@@ -567,9 +572,10 @@ const S7 = {
     const d = f <= 287 ? 168 : lerp(168, 123, E.in(clamp((f - 287) / 13)));
     const cy = DT7(f) + 84, vy = deriv(DT7, f);
     const smear = f < 246 ? 9 : 0;
-    const disc = `<g transform="scale(${n2(d / 168)})"><circle r="84" fill="#F6F6F6" stroke="#ECECEE"/>${mark(0, 1, 104)}</g>`;
+    const hero = `<g transform="scale(${n2(d / 168)})"><circle r="300" fill="${rgrad([[0, '#E3EFFB'], [0.7, '#EDF4FB'], [1, '#F7FAFD']])}" stroke="#E8EEF5"/>${box(0, 318, 636)}</g>`;
     return `<rect width="1080" height="1080" fill="${C.page}"/>
-${dirBlur(disc, 540, cy, 90, Math.min(22, Math.abs(vy) * 0.22) + smear)}`;
+<ellipse cx="540" cy="1150" rx="900" ry="360" fill="${rgrad([[0, C.floor], [1, C.floor, 0]])}"/>
+${dirBlur(hero, 540, cy, 90, Math.min(22, Math.abs(vy) * 0.22) + smear)}`;
   },
 };
 
@@ -597,7 +603,7 @@ const S8 = {
     DEFS.push(`<filter id="${glowId}" filterUnits="userSpaceOnUse" x="-600" y="-200" width="2280" height="1480"><feGaussianBlur in="SourceGraphic" stdDeviation="${n2(fs * 0.05)}" result="a"/><feGaussianBlur in="SourceGraphic" stdDeviation="${n2(fs * 0.4)}" result="b"/><feComponentTransfer in="b" result="b2"><feFuncA type="linear" slope=".55"/></feComponentTransfer><feComponentTransfer in="a" result="a2"><feFuncA type="linear" slope=".75"/></feComponentTransfer><feMerge><feMergeNode in="b2"/><feMergeNode in="a2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`);
     const siteOp = clamp((f - 314) / 10), siteRise = kf(f, [[314, 16], [328, 0]], E.expo);
     const sfs = fs * 0.2;
-    const site = siteOp > 0 ? `<g opacity="${n2(siteOp)}" ${blur(kf(f, [[314, 4], [324, 0]], E.expo))}><text x="540" y="${n2(540 + fs * 0.98 + siteRise)}" text-anchor="middle" font-weight="500" font-size="${n2(sfs)}" letter-spacing="${n2(sfs * 0.06)}" fill="#A6A6AE">${esc(T.site)}</text></g>` : '';
+    const site = siteOp > 0 ? `<g opacity="${n2(siteOp)}" ${blur(kf(f, [[314, 4], [324, 0]], E.expo))}><text x="540" y="${n2(540 + fs * 0.84 + siteRise)}" text-anchor="middle" font-weight="500" font-size="${n2(fs * 0.22)}" fill="#D6D6DC">${esc(T.tagline)}</text><text x="540" y="${n2(540 + fs * 1.3 + siteRise * 1.4)}" text-anchor="middle" font-weight="500" font-size="${n2(sfs)}" letter-spacing="${n2(sfs * 0.06)}" fill="#A6A6AE">${esc(T.site)}</text></g>` : '';
     return `<rect width="1080" height="1080" fill="${rgrad([[0, '#2A2A2C'], [0.45, '#111113'], [1, '#020204']], 540, 540, 765, 540, 540, 'userSpaceOnUse')}"/>
 <g ${blur(Math.min(26, Math.abs(dw) * 0.035) + end, end)}>
 ${streaks}
@@ -619,6 +625,7 @@ window.seek = function (f) {
 window.ready = (async () => {
   await Promise.all([400, 500, 600, 700].map(w => document.fonts.load(`${w} 40px IN`, 'Витатен aksonmegavit')));
   await document.fonts.ready;
+  await new Promise(r => { const im = new Image(); im.onload = im.onerror = r; im.src = 'box.png'; });
   layout();
   const q = new URLSearchParams(location.search).get('f');
   window.seek(q ? parseFloat(q) : 40);
