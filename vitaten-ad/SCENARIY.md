@@ -39,3 +39,13 @@ node source/rec.js "$PWD/source"   # кадрлар: source/frames/
 python3 source/music.py            # music.wav
 ffmpeg -framerate 30 -i source/frames/f%04d.jpg -i music.wav -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest out.mp4
 ```
+
+## 16:9 версия (28 сония, 1920×1080)
+
+Тайёр видео: `vitaten_reklama_16x9.mp4`. Манба: `source/ad169.html`, `source/rec169.js`, `source/music169.py`.
+
+- 0–5,6 с — ҳақиқий оила сурати (нонушта, апельсин шарбати), `source/fam1.jpg`
+- 23,4–28 с — боғдаги оила сурати + маҳсулот ва шиор, `source/fam2.jpg`
+
+Иккала сурат Canva'да AI ёрдамида яратилган (дизайн: «Vitaten photo canvas»).
+Диктор овози ҳали қўшилмаган — матн юқоридаги жадвалда, вақтлари 16:9 саҳналарига мос.
