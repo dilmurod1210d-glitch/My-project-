@@ -1,0 +1,183 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/nunito.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:'Nunito',sans-serif;background:#2b8fe0}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:linear-gradient(180deg,#1e6fd0 0%,#3fa4ee 45%,#8fd2fb 78%,#c9ecff 100%)}
+.cloud{position:absolute;background:#fff;border-radius:50%;filter:blur(18px);opacity:.75}
+.grass{position:absolute;left:-100px;right:-100px;bottom:-260px;height:520px;border-radius:50% 50% 0 0;
+  background:linear-gradient(180deg,#7cd14a,#3f9a2c)}
+.abs{position:absolute;left:0;right:0;text-align:center}
+.bubble{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:56px;color:#fff;box-shadow:inset -14px -18px 30px rgba(0,0,0,.18),inset 14px 14px 30px rgba(255,255,255,.45),0 18px 40px rgba(0,40,120,.25)}
+.h1{font-weight:900;color:#fff;text-shadow:0 8px 0 #0b3c8c,0 14px 30px rgba(0,30,90,.35);line-height:1.05}
+.red{color:#ffde3b}
+#box{position:absolute;width:520px;filter:drop-shadow(0 40px 50px rgba(0,30,90,.45))}
+.glow{position:absolute;width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,255,255,.35) 35%,rgba(255,255,255,0) 70%)}
+.ribbon{display:inline-block;background:#173f91;color:#fff;font-weight:900;padding:18px 46px;border-radius:20px;
+  border-left:18px solid #e5262d;box-shadow:0 14px 30px rgba(0,30,90,.3)}
+.chip{position:absolute;width:300px;height:96px;border-radius:48px;background:#fff;color:#173f91;font-weight:800;font-size:34px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,30,90,.22)}
+.chip i{font-style:normal;display:inline-block;width:22px;height:22px;border-radius:50%;margin-right:14px}
+.badge{position:absolute;left:470px;width:560px;height:170px;border-radius:36px;background:#fff;display:flex;align-items:center;
+  padding:0 30px;box-shadow:0 16px 34px rgba(0,30,90,.25)}
+.badge .ic{width:110px;height:110px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:62px;font-weight:900;color:#fff;margin-right:26px}
+.badge .tx{font-weight:900;font-size:44px;color:#173f91;line-height:1.05}
+.badge .tx small{display:block;font-weight:700;font-size:28px;color:#4a6aa8;margin-top:6px}
+.row{position:absolute;left:90px;width:900px;height:170px;border-radius:34px;background:#fff;display:flex;align-items:center;box-shadow:0 14px 30px rgba(0,30,90,.22)}
+.row .age{width:300px;height:100%;border-radius:34px 0 0 34px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:50px}
+.row .dose{flex:1;text-align:center;font-weight:900;font-size:50px;color:#173f91}
+.row .dose span{color:#e5262d}
+.small{font-weight:700;color:#fff;font-size:30px;opacity:.95;line-height:1.35}
+.scene{position:absolute;inset:0}
+</style></head>
+<body><div id="stage">
+  <div class="cloud" style="width:420px;height:150px;left:-60px;top:260px" data-dx="30"></div>
+  <div class="cloud" style="width:520px;height:170px;left:640px;top:520px" data-dx="-40"></div>
+  <div class="cloud" style="width:360px;height:120px;left:120px;top:1050px" data-dx="35"></div>
+  <div class="cloud" style="width:480px;height:160px;left:700px;top:1300px" data-dx="-25"></div>
+  <div class="grass" id="grass"></div>
+
+  <!-- floating vitamin bubbles (scene 1 + background) -->
+  <div id="bubbles"></div>
+
+  <!-- S1 -->
+  <div class="scene" id="s1">
+    <div class="abs h1" id="s1a" style="top:640px;font-size:96px">Бутун оила<br>учун</div>
+    <div class="abs h1" id="s1b" style="top:900px;font-size:118px"><span class="red">соғлом</span> ва<br><span class="red">бардам</span> кун!</div>
+  </div>
+
+  <!-- product glow + box shared by several scenes -->
+  <div class="glow" id="glow"></div>
+  <img id="box" src="box.png">
+
+  <!-- S2 -->
+  <div class="scene" id="s2">
+    <div class="abs" id="s2a" style="top:150px"><span class="ribbon" style="font-size:118px;letter-spacing:4px">ВИТАТЕН</span></div>
+    <div class="abs h1" id="s2b" style="top:350px;font-size:58px">мультивитаминли сироп</div>
+  </div>
+
+  <!-- S3 -->
+  <div class="scene" id="s3">
+    <div class="abs h1" id="s3n" style="top:110px;font-size:230px;color:#ffde3b">18</div>
+    <div class="abs h1" id="s3t" style="top:370px;font-size:62px">фойдали компонент<br>1 та флаконда</div>
+    <div id="chips"></div>
+  </div>
+
+  <!-- S4 -->
+  <div class="scene" id="s4">
+    <div class="badge" id="b1"><div class="ic" style="background:#2fb24c">✓</div><div class="tx">Шакарсиз<small>таркибида шакар йўқ</small></div></div>
+    <div class="badge" id="b2"><div class="ic" style="background:#ff9a1f">🍊</div><div class="tx">Апельсин таъми<small>болалар севиб ичади</small></div></div>
+    <div class="badge" id="b3"><div class="ic" style="background:#e5262d">1+</div><div class="tx">1 ёшдан бошлаб<small>болалар ва катталар учун</small></div></div>
+  </div>
+
+  <!-- S5 -->
+  <div class="scene" id="s5">
+    <div class="abs h1" id="s5t" style="top:170px;font-size:76px">Кунига қанча ичилади?</div>
+    <div class="row" id="r1" style="top:430px"><div class="age" style="background:#ff9a1f">1–3 ёш</div><div class="dose">2,5 мл <span>× 1</span> марта</div></div>
+    <div class="row" id="r2" style="top:640px"><div class="age" style="background:#2fb24c">3–6 ёш</div><div class="dose">2,5 мл <span>× 2</span> марта</div></div>
+    <div class="row" id="r3" style="top:850px"><div class="age" style="background:#2a7de1">6–14 ёш</div><div class="dose">5 мл <span>× 2</span> марта</div></div>
+    <div class="row" id="r4" style="top:1060px"><div class="age" style="background:#e5262d">14+ ёш</div><div class="dose">5 мл <span>× 3</span> марта</div></div>
+    
+  </div>
+
+  <!-- S6 -->
+  <div class="scene" id="s6">
+    <div class="abs" id="s6a" style="top:110px"><span class="ribbon" style="font-size:112px;letter-spacing:4px">ВИТАТЕН</span></div>
+    <div class="abs h1" id="s6b" style="top:300px;font-size:60px">бутун оила саломатлиги учун!</div>
+    <div class="abs h1" id="s6c" style="top:1420px;font-size:66px">Дорихоналардан сўранг</div>
+    <div class="abs small" id="s6d" style="top:1600px;margin:0 60px;padding:22px 20px;font-size:27px;background:rgba(10,50,30,.45);border-radius:24px">
+      Қўллашдан олдин мутахассис билан маслаҳатлашинг.<br>
+      Компонентларга индивидуал сезувчанликда мумкин эмас.<br>
+      Ишлаб чиқарувчи: «MEGAVITFARM» МЧЖ, Ўзбекистон
+    </div>
+  </div>
+</div>
+<script>
+const D=27; // duration in seconds
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOut=x=>1-Math.pow(1-clamp(x),3);
+const easeInOut=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+// visibility window: fade in over 0.4s from a, fade out over 0.4s before b
+const win=(t,a,b,f=.4)=>clamp((t-a)/f)*clamp((b-t)/f);
+
+// bubbles
+const bubData=[["A","#ff9a1f",90,420],["C","#ffb400",820,300],["D3","#2fb24c",130,1330],["E","#e5262d",830,1250],
+  ["B6","#7a4bd6",80,880],["B12","#2a7de1",850,820],["Zn","#14a3a3",420,1520],["Mg","#d64b9a",700,1600],["Fe","#c0392b",250,180]];
+const bubs=bubData.map(([l,c,x,y],i)=>{const d=document.createElement('div');d.className='bubble';d.textContent=l;
+  d.style.background=`radial-gradient(circle at 35% 30%,#fff8 0,${c} 45%,${c} 100%)`;if(l.length>2)d.style.fontSize='46px';
+  $('bubbles').appendChild(d);return {d,x,y,i}});
+
+// chips for 18 components
+const comps=[["Витамин A","#ff9a1f"],["Витамин B2","#2a7de1"],["Витамин B3","#2a7de1"],["Витамин B5","#2a7de1"],["Витамин B6","#2a7de1"],["Витамин B9","#2a7de1"],
+ ["Витамин B12","#2a7de1"],["Витамин C","#ffb400"],["Витамин D3","#2fb24c"],["Витамин E","#e5262d"],["L-карнитин","#7a4bd6"],["L-аргинин","#7a4bd6"],
+ ["Селен","#14a3a3"],["Калий йодид","#14a3a3"],["Темир","#14a3a3"],["Кальций","#14a3a3"],["Рух","#14a3a3"],["Магний","#14a3a3"]];
+const chips=comps.map(([n,c],i)=>{const d=document.createElement('div');d.className='chip';d.innerHTML=`<i style="background:${c}"></i>${n}`;
+  const col=i%3,row=Math.floor(i/3);d.style.left=(45+col*340)+'px';d.style.top=(640+row*132)+'px';$('chips').appendChild(d);return d});
+
+const clouds=[...document.querySelectorAll('.cloud')];
+function set(el,o,tf){el.style.opacity=o;el.style.transform=tf||'';el.style.visibility=o<=0.001?'hidden':'visible'}
+
+window.render=function(t){
+  clouds.forEach((c,i)=>c.style.transform=`translateX(${Math.sin(t*.25+i)*c.dataset.dx*2}px)`);
+  // grass rises at end scene
+  $('grass').style.transform=`translateY(${(1-easeOut((t-22.3)/1))*300}px)`;
+
+  // bubbles: visible in S1 strongly, faint later
+  const bv=t<4.6?win(t,0,4.6,.5):0.35*win(t,4.8,22.3,.6);
+  bubs.forEach(b=>{const s=back((t-0.15*b.i)/0.7);
+    const fx=Math.sin(t*1.1+b.i)*18,fy=Math.cos(t*.9+b.i*2)*24;
+    set(b.d,bv*clamp((t-0.15*b.i)/0.3),`translate(${b.x+fx}px,${b.y+fy}px) scale(${t<4.6?s:0.7})`)});
+
+  // S1
+  set($('s1a'),win(t,.3,4.4),`translateY(${(1-easeOut((t-.3)/.7))*80}px)`);
+  set($('s1b'),win(t,.9,4.4),`scale(${0.6+0.4*back((t-.9)/.7)})`);
+
+  // BOX: path through scenes
+  const box=$('box'); let bx=280,by=640,bs=0,bo=0,rot=0;
+  if(t>=4.4&&t<9){const p=back((t-4.4)/.9);bs=0.2+0.8*p;bo=clamp((t-4.4)/.3);rot=(1-p)*-12+Math.sin(t*1.5)*1.5;by=560+Math.sin(t*2)*12;
+     if(t>8.6){bo=clamp((9-t)/.4)}}
+  else if(t>=14&&t<18.6){const p=easeOut((t-14)/.7);bx=-10;by=560+Math.sin(t*2)*10;bs=0.78;bo=clamp((t-14)/.3)*clamp((18.6-t)/.4);rot=-4;bx=-10-(1-p)*300}
+  else if(t>=22.3){const p=back((t-22.3)/.9);bs=0.1+0.75*p;bo=clamp((t-22.3)/.3);by=430+Math.sin(t*2)*10;bx=280;rot=Math.sin(t*1.5)*1.5}
+  box.style.left='0';box.style.top='0';
+  set(box,bo,`translate(${bx}px,${by}px) rotate(${rot}deg) scale(${bs})`);
+  box.style.transformOrigin='50% 50%';
+  // glow follows box
+  const g=$('glow');set(g,bo*(0.75+0.25*Math.sin(t*3)),`translate(${bx+260-450}px,${by+535-450}px) scale(${0.8+0.1*Math.sin(t*2)})`);
+
+  // S2
+  set($('s2a'),win(t,4.9,9),`scale(${back((t-4.9)/.6)})`);
+  set($('s2b'),win(t,5.4,9),`translateY(${(1-easeOut((t-5.4)/.6))*50}px)`);
+
+  // S3
+  const n=Math.round(clamp((t-9.2)/1.6)*18);
+  $('s3n').textContent=n;
+  set($('s3n'),win(t,9.1,14),`scale(${0.5+0.5*back((t-9.1)/.6)})`);
+  set($('s3t'),win(t,9.5,14),`translateY(${(1-easeOut((t-9.5)/.6))*50}px)`);
+  chips.forEach((c,i)=>{const a=9.4+i*0.09;set(c,win(t,a,14,.25),`scale(${back((t-a)/.4)})`)});
+
+  // S4
+  ['b1','b2','b3'].forEach((id,i)=>{const a=14.4+i*.55;const e=$(id);e.style.top=(470+i*240)+'px';
+    set(e,win(t,a,18.6),`translateX(${(1-easeOut((t-a)/.6))*700}px)`)});
+
+  // S5
+  set($('s5t'),win(t,18.7,22.4),`translateY(${(1-easeOut((t-18.7)/.5))*-60}px)`);
+  ['r1','r2','r3','r4'].forEach((id,i)=>{const a=19+i*.35;set($(id),win(t,a,22.4),`translateX(${(i%2?1:-1)*(1-easeOut((t-a)/.5))*1100}px)`)});
+  
+
+  // S6
+  set($('s6a'),win(t,22.6,D+1),`scale(${back((t-22.6)/.6)})`);
+  set($('s6b'),win(t,23,D+1),`translateY(${(1-easeOut((t-23)/.6))*40}px)`);
+  set($('s6c'),win(t,23.6,D+1),`scale(${0.7+0.3*back((t-23.6)/.6)})`);
+  set($('s6d'),win(t,24.2,D+1),'');
+  // final fade from white-ish? keep bright; slight fade to end
+};
+window.DURATION=D;
+render(0);
+</script>
+</body></html>
