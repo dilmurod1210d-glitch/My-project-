@@ -14,8 +14,15 @@ html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Nunito',sans-s
 #s1a,#s1b,#s1c{text-shadow:0 5px 0 rgba(170,60,20,.55),0 16px 34px rgba(120,40,0,.35)}
 .ribbon{display:inline-block;background:linear-gradient(180deg,#1f4fb0,#123578);color:#fff;font-weight:900;padding:14px 50px 18px;border-radius:22px;
   border-left:22px solid #e5262d;box-shadow:0 18px 40px rgba(0,20,70,.4);letter-spacing:6px}
-#box{position:absolute;left:0;top:0;width:430px;transform-origin:50% 50%;filter:drop-shadow(0 50px 50px rgba(0,20,60,.45))}
-.shine{position:absolute;left:0;top:0;width:430px;height:867px;overflow:hidden;border-radius:6px;pointer-events:none}
+#prod{transform-style:preserve-3d}
+.face{position:absolute;left:0;top:0;backface-visibility:hidden;background-size:100% 100%}
+#fFront{width:360px;height:858px;background-image:url(box_front.jpg);border-radius:3px}
+#fFront:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 18%,rgba(0,0,0,0) 80%,rgba(0,0,0,.18))}
+#fSide{width:110px;height:858px;left:360px;transform-origin:0 50%;transform:rotateY(90deg);background-image:url(box_side.jpg);box-shadow:inset 18px 0 30px rgba(0,0,0,.25)}
+#fSideL{width:110px;height:858px;left:-110px;transform-origin:100% 50%;transform:rotateY(-90deg);background-image:url(box_side.jpg);box-shadow:inset -18px 0 30px rgba(0,0,0,.25)}
+#fTop{width:360px;height:110px;top:-110px;transform-origin:50% 100%;transform:rotateX(90deg);background-image:url(box_top.jpg)}
+#pshadow{position:absolute;left:0;top:0;width:520px;height:90px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,15,50,.75) 0%,rgba(0,15,50,.35) 45%,rgba(0,15,50,0) 70%)}
+.shine{position:absolute;left:0;top:0;width:360px;height:858px;overflow:hidden;border-radius:3px;pointer-events:none}
 .shine:after{content:"";position:absolute;top:-20%;bottom:-20%;width:120px;left:var(--sx,-200px);transform:skewX(-20deg);
   background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))}
 .rays{position:absolute;width:2600px;height:2600px;left:-340px;top:-760px;border-radius:50%;
@@ -48,7 +55,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Nunito',sans-s
 <div class="layer" id="bgBlue" style="background:radial-gradient(ellipse at 50% 45%,#5cc0ff 0%,#2a8de6 40%,#1450b8 100%)"></div>
 <div class="layer" id="bgOrange" style="background:radial-gradient(ellipse at 50% 50%,#ffd36b 0%,#ff9d1f 45%,#f0620a 100%)"></div>
 <div class="layer" id="ph1" style="background:url(fam1.jpg) center/cover"><div class="layer" style="background:linear-gradient(90deg,rgba(240,110,40,0) 40%,rgba(240,110,40,.55) 58%,rgba(230,90,30,.85) 100%)"></div></div>
-<div class="layer" id="ph2" style="background:url(fam2.jpg) center/cover"><div class="layer" style="background:linear-gradient(90deg,rgba(20,80,184,0) 30%,rgba(20,80,184,.7) 48%,rgba(20,80,184,.92) 62%)"></div></div>
+<div class="layer" id="ph2" style="background:url(fam2.jpg) -300px 0/1920px 1080px no-repeat"><div class="layer" style="background:linear-gradient(90deg,rgba(20,80,184,0) 26%,rgba(20,80,184,.75) 40%,rgba(20,80,184,.96) 52%)"></div></div>
 <div class="rays" id="rays"></div>
 
 <!-- sun + hills for family scenes -->
@@ -116,8 +123,10 @@ html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Nunito',sans-s
 
 <!-- product -->
 <div class="glow" id="glow"></div>
-<div class="abs" id="prod" style="left:0;top:0;width:430px;height:867px">
-  <img id="box" src="box2.png"><div class="shine" id="shine"></div>
+<div id="pshadow"></div>
+<div class="abs" id="prod" style="left:35px;top:5px;width:360px;height:858px">
+  <div class="face" id="fTop"></div><div class="face" id="fSide"></div><div class="face" id="fSideL"></div>
+  <div class="face" id="fFront"><div class="shine" id="shine"></div></div>
 </div>
 
 <!-- SCENE 2 -->
@@ -143,10 +152,10 @@ html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Nunito',sans-s
 <div class="abs h" id="s5n" style="left:0;width:1920px;text-align:center;top:800px;font-size:36px;font-weight:800">14 ёшдан катталарга — кунига 4 мартагача</div>
 
 <!-- SCENE 6: packshot -->
-<div class="abs" id="s6a" style="left:1190px;top:190px"><span class="ribbon" style="font-size:96px;letter-spacing:4px;padding:10px 36px 14px">ВИТАТЕН</span></div>
-<div class="abs h" id="s6b" style="left:1200px;top:360px;font-size:54px;width:700px">бутун оила<br><span class="y">саломатлиги учун!</span></div>
-<div class="abs h" id="s6c" style="left:1200px;top:540px;font-size:46px;width:700px">Дорихоналардан сўранг</div>
-<div class="abs disc" id="s6d" style="left:1200px;top:660px;width:680px;font-size:21px">Қўллашдан олдин мутахассис билан маслаҳатлашинг.<br>Ишлаб чиқарувчи: «MEGAVITFARM» МЧЖ, Ўзбекистон</div>
+<div class="abs" id="s6a" style="left:1290px;top:210px"><span class="ribbon" style="font-size:86px;letter-spacing:4px;padding:10px 32px 14px">ВИТАТЕН</span></div>
+<div class="abs h" id="s6b" style="left:1300px;top:370px;font-size:50px;width:600px">бутун оила<br><span class="y">саломатлиги учун!</span></div>
+<div class="abs h" id="s6c" style="left:1300px;top:540px;font-size:42px;width:600px">Дорихоналардан сўранг</div>
+<div class="abs disc" id="s6d" style="left:1300px;top:650px;width:580px;font-size:19px">Қўллашдан олдин мутахассис билан маслаҳатлашинг.<br>Ишлаб чиқарувчи: «MEGAVITFARM» МЧЖ, Ўзбекистон</div>
 
 <div class="layer" id="flash" style="background:#fff"></div>
 </div>
@@ -217,13 +226,14 @@ window.render=function(t){
 
   // product path
   let px=0,py=0,ps=0,po=0,ry=0,rz=0;
-  if(t>=5.6&&t<10.4){const p=back((t-5.6)/1);po=clamp((t-5.6)/.2)*clamp((10.4-t)/.3);ps=.25+.75*p;px=380;py=95+Math.sin(t*2)*10;ry=(1-eo((t-5.6)/1.2))*-70+Math.sin(t*1.3)*6;rz=(1-p)*-10}
-  else if(t>=10.4&&t<15.3){po=clamp((t-10.4)/.3)*clamp((15.3-t)/.3);ps=.8;px=745;py=98+Math.sin(t*2)*8;ry=Math.sin(t*1.2)*8}
-  else if(t>=23.4){const p=back((t-23.4)/.9);po=clamp((t-23.4)/.2);ps=.15+.5*p;px=740;py=95+Math.sin(t*2)*8;ry=(1-eo((t-23.4)/1))*60+Math.sin(t*1.3)*5}
-  set($('prod'),po,`translate(${px}px,${py}px) perspective(1400px) rotateY(${ry}deg) rotate(${rz}deg) scale(${ps})`);
+  if(t>=5.6&&t<10.4){const p=back((t-5.6)/1);po=clamp((t-5.6)/.2)*clamp((10.4-t)/.3);ps=.25+.75*p;px=380;py=95+Math.sin(t*2)*10;ry=-22+(1-eo((t-5.6)/1.2))*-60+Math.sin(t*1.3)*6;rz=(1-p)*-10}
+  else if(t>=10.4&&t<15.3){po=clamp((t-10.4)/.3)*clamp((15.3-t)/.3);ps=.8;px=745;py=98+Math.sin(t*2)*8;ry=-18+Math.sin(t*1.2)*10}
+  else if(t>=23.4){const p=back((t-23.4)/.9);po=clamp((t-23.4)/.2);ps=.15+.55*p;px=845;py=85+Math.sin(t*2)*6;ry=-20+(1-eo((t-23.4)/1))*60+Math.sin(t*1.3)*4}
+  set($('prod'),po,`translate(${px}px,${py}px) perspective(1800px) rotateY(${ry}deg) rotate(${rz}deg) scale(${ps})`);
+  set($('pshadow'),po*.9,`translate(${px+35+180-260}px,${py+5+429+410*ps-45}px) scale(${ps*1.05},${ps})`);
   $('prod').style.transformOrigin='50% 50%';
   $('shine').style.setProperty('--sx',(((t*0.55)%1.6)*900-300)+'px');
-  set($('glow'),po*(t>=23.4?.45:1)*(.8+.2*Math.sin(t*3)),`translate(${px+215-550}px,${py+442-550}px)`);
+  set($('glow'),po*(t>=23.4?.35:1)*(.8+.2*Math.sin(t*3)),`translate(${px+215-550}px,${py+434-550}px)`);
 
   // oranges in scene 2 and 4
   const orV=win(t,5.8,10.4,.4)+win(t,15.4,19.3,.4);
