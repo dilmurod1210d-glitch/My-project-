@@ -1,0 +1,263 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/nunito.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Nunito',sans-serif;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
+.layer{position:absolute;inset:0}
+.abs{position:absolute}
+.h{font-weight:900;color:#fff;line-height:1.02;text-shadow:0 6px 0 rgba(10,40,110,.55),0 18px 40px rgba(0,20,70,.35)}
+.y{color:#ffd23a}
+.o{color:#ff8a00}
+.bl{color:#173f91;text-shadow:0 0 0 #fff,0 5px 0 #fff,0 14px 30px rgba(120,40,0,.3)}
+#s1a,#s1b,#s1c{text-shadow:0 5px 0 rgba(170,60,20,.55),0 16px 34px rgba(120,40,0,.35)}
+.ribbon{display:inline-block;background:linear-gradient(180deg,#1f4fb0,#123578);color:#fff;font-weight:900;padding:14px 50px 18px;border-radius:22px;
+  border-left:22px solid #e5262d;box-shadow:0 18px 40px rgba(0,20,70,.4);letter-spacing:6px}
+#box{position:absolute;left:0;top:0;width:430px;transform-origin:50% 50%;filter:drop-shadow(0 50px 50px rgba(0,20,60,.45))}
+.shine{position:absolute;left:0;top:0;width:430px;height:867px;overflow:hidden;border-radius:6px;pointer-events:none}
+.shine:after{content:"";position:absolute;top:-20%;bottom:-20%;width:120px;left:var(--sx,-200px);transform:skewX(-20deg);
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))}
+.rays{position:absolute;width:2600px;height:2600px;left:-340px;top:-760px;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.16) 0deg 7deg,rgba(255,255,255,0) 7deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 30%,transparent 62%);mask:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 30%,transparent 62%)}
+.glow{position:absolute;width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,255,255,.35) 32%,rgba(255,255,255,0) 68%)}
+.orb{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  font-weight:900;color:#fff;font-size:44px;line-height:1;
+  box-shadow:inset -12px -16px 26px rgba(0,0,0,.2),inset 12px 12px 26px rgba(255,255,255,.5),0 16px 34px rgba(0,30,90,.3)}
+.orb small{font-size:17px;font-weight:800;margin-top:4px;opacity:.95}
+.card{position:absolute;background:#fff;border-radius:40px;box-shadow:0 24px 50px rgba(0,30,90,.28);overflow:hidden}
+.card .ic{width:150px;height:150px;border-radius:50%;margin:46px auto 22px;display:flex;align-items:center;justify-content:center;font-size:84px;font-weight:900;color:#fff}
+.card .t{text-align:center;font-weight:900;font-size:50px;color:#173f91;line-height:1.05}
+.card .s{text-align:center;font-weight:700;font-size:28px;color:#5872a8;margin-top:12px;padding:0 24px}
+.dose{position:absolute;top:0;width:370px;height:430px;background:#fff;border-radius:38px;box-shadow:0 22px 46px rgba(0,30,90,.25);text-align:center;overflow:hidden}
+.dose .age{height:120px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:54px}
+.dose .ml{font-weight:900;font-size:84px;color:#173f91;margin-top:34px}
+.dose .ml span{font-size:44px}
+.dose .x{font-weight:900;font-size:40px;color:#e5262d;margin-top:10px}
+.dose .x small{display:block;color:#5872a8;font-size:28px;font-weight:700}
+.spoon{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.spoon i{width:34px;height:34px;border-radius:50%;background:#ff9a1f;box-shadow:inset -4px -5px 8px rgba(0,0,0,.18)}
+.disc{font-weight:700;color:#fff;font-size:24px;line-height:1.4;background:rgba(8,30,80,.5);border-radius:20px;padding:14px 28px;text-align:center}
+.drop{position:absolute;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 35% 30%,#fff3 0,#ffb000 40%,#ff7a00 100%)}
+</style></head>
+<body><div id="stage">
+
+<!-- BACKGROUNDS -->
+<div class="layer" id="bgMorning" style="background:radial-gradient(ellipse at 70% 20%,#fff2b3 0%,#ffc768 25%,#ff9a52 55%,#e8644a 100%)"></div>
+<div class="layer" id="bgBlue" style="background:radial-gradient(ellipse at 50% 45%,#5cc0ff 0%,#2a8de6 40%,#1450b8 100%)"></div>
+<div class="layer" id="bgOrange" style="background:radial-gradient(ellipse at 50% 50%,#ffd36b 0%,#ff9d1f 45%,#f0620a 100%)"></div>
+<div class="rays" id="rays"></div>
+
+<!-- sun + hills for family scenes -->
+<svg class="abs" id="sun" width="420" height="420" viewBox="0 0 420 420" style="left:1350px;top:80px">
+  <circle cx="210" cy="210" r="120" fill="#fff6c9"/><circle cx="210" cy="210" r="170" fill="#fff6c9" opacity=".25"/><circle cx="210" cy="210" r="205" fill="#fff6c9" opacity=".12"/>
+</svg>
+<svg class="abs" id="hills" width="1920" height="420" viewBox="0 0 1920 420" style="left:0;top:700px">
+  <path d="M0 170 C300 60 600 60 900 150 C1200 240 1500 60 1920 120 L1920 420 L0 420Z" fill="#8fd25a"/>
+  <path d="M0 260 C400 150 800 200 1100 250 C1400 300 1650 190 1920 230 L1920 420 L0 420Z" fill="#5bb33a"/>
+</svg>
+
+<!-- FAMILY (illustrated, in packaging style) -->
+<svg class="abs" id="family" width="1000" height="620" viewBox="0 0 1000 620" style="left:120px;top:380px">
+  <defs><filter id="sh"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity=".25"/></filter></defs>
+  <g filter="url(#sh)">
+  <!-- kid 1 -->
+  <g id="k1" transform="translate(150,330)">
+    <circle cx="0" cy="0" r="46" fill="#ff8a1a"/>
+    <path d="M-40 60 Q0 40 40 60 L48 170 L-48 170Z" fill="#ff8a1a"/>
+    <rect x="-36" y="160" width="28" height="110" rx="14" fill="#ff8a1a"/><rect x="8" y="160" width="28" height="110" rx="14" fill="#ff8a1a"/>
+    <rect id="k1a" x="-90" y="20" width="26" height="110" rx="13" fill="#ff8a1a" transform="rotate(40 -40 70)"/>
+    <rect x="38" y="60" width="26" height="100" rx="13" fill="#ff8a1a" transform="rotate(-35 50 70)"/>
+  </g>
+  <!-- dad -->
+  <g transform="translate(380,170)">
+    <circle cx="0" cy="0" r="66" fill="#1d3f94"/>
+    <path d="M-80 90 Q0 60 80 90 L76 300 L-76 300Z" fill="#1d3f94"/>
+    <rect x="-66" y="280" width="56" height="170" rx="26" fill="#1d3f94"/><rect x="10" y="280" width="56" height="170" rx="26" fill="#1d3f94"/>
+    <rect x="-118" y="95" width="40" height="190" rx="20" fill="#1d3f94" transform="rotate(25 -96 100)"/>
+    <rect x="78" y="95" width="40" height="190" rx="20" fill="#1d3f94" transform="rotate(-12 96 100)"/>
+  </g>
+  <!-- mom -->
+  <g transform="translate(600,190)">
+    <circle cx="0" cy="0" r="60" fill="#e5262d"/>
+    <path d="M-60 80 Q0 55 60 80 L120 330 L-120 330Z" fill="#e5262d"/>
+    <rect x="-50" y="320" width="34" height="110" rx="17" fill="#e5262d"/><rect x="16" y="320" width="34" height="110" rx="17" fill="#e5262d"/>
+    <rect x="-96" y="90" width="36" height="170" rx="18" fill="#e5262d" transform="rotate(12 -78 100)"/>
+    <rect x="62" y="90" width="36" height="170" rx="18" fill="#e5262d" transform="rotate(-25 80 100)"/>
+  </g>
+  <!-- kid 2 -->
+  <g id="k2" transform="translate(840,350)">
+    <circle cx="0" cy="0" r="42" fill="#ffb21a"/>
+    <path d="M-36 56 Q0 38 36 56 L60 160 L-60 160Z" fill="#ffb21a"/>
+    <rect x="-30" y="150" width="24" height="100" rx="12" fill="#ffb21a"/><rect x="6" y="150" width="24" height="100" rx="12" fill="#ffb21a"/>
+    <rect x="-62" y="56" width="24" height="96" rx="12" fill="#ffb21a" transform="rotate(35 -50 66)"/>
+    <rect x="38" y="20" width="24" height="100" rx="12" fill="#ffb21a" transform="rotate(-40 40 66)"/>
+  </g>
+  </g>
+  <g id="hearts" fill="#e5262d">
+    <path id="h1" d="M490 40 c-12-22-46-14-46 10 c0 22 46 46 46 46 s46-24 46-46 c0-24-34-32-46-10z"/>
+    <path id="h2" d="M150 210 c-8-15-32-10-32 7 c0 15 32 32 32 32 s32-17 32-32 c0-17-24-22-32-7z"/>
+    <path id="h3" d="M850 220 c-8-15-32-10-32 7 c0 15 32 32 32 32 s32-17 32-32 c0-17-24-22-32-7z"/>
+  </g>
+</svg>
+
+<!-- orange slices + drops (scene 2/4) -->
+<div id="oranges"></div>
+
+<!-- SCENE 1 text -->
+<div class="abs h" id="s1a" style="left:1060px;top:300px;font-size:84px;width:820px">Эрталабдан<br>кечгача —</div>
+<div class="abs h" id="s1b" style="left:1060px;top:500px;font-size:112px;width:820px"><span class="bl">куч ва</span><br><span class="bl">ғайрат!</span></div>
+
+<!-- SCENE 1b: question -->
+<div class="abs h" id="s1c" style="left:1060px;top:330px;font-size:70px;width:820px">Бутун оила<br>учун керакли<br><span class="bl">витаминлар</span><br>битта флаконда</div>
+
+<!-- product -->
+<div class="glow" id="glow"></div>
+<div class="abs" id="prod" style="left:0;top:0;width:430px;height:867px">
+  <img id="box" src="box2.png"><div class="shine" id="shine"></div>
+</div>
+
+<!-- SCENE 2 -->
+<div class="abs" id="s2a" style="left:1000px;top:330px"><span class="ribbon" style="font-size:150px">ВИТАТЕН</span></div>
+<div class="abs h" id="s2b" style="left:1010px;top:560px;font-size:64px">мультивитаминли сироп</div>
+<div class="abs h" id="s2c" style="left:1010px;top:650px;font-size:44px;font-weight:800">MEGAVIT</div>
+
+<!-- SCENE 3: orbit -->
+<div id="orbs"></div>
+<div class="abs h" id="s3n" style="left:120px;top:300px;font-size:300px;color:#ffd23a">18</div>
+<div class="abs h" id="s3t" style="left:130px;top:620px;font-size:60px">фойдали<br>компонент</div>
+<div class="abs h" id="s3r" style="left:1530px;top:390px;font-size:40px;line-height:1.35;font-weight:800">10 та витамин<br>6 та минерал<br>L-карнитин<br>L-аргинин</div>
+
+<!-- SCENE 4: cards -->
+<div class="abs h" id="s4t" style="left:0;width:1920px;text-align:center;top:90px;font-size:80px">Болалар ҳам, катталар ҳам <span class="y">севиб ичади</span></div>
+<div class="card" id="c1" style="left:180px;top:280px;width:480px;height:450px"><div class="ic" style="background:#2fb24c">✓</div><div class="t">Шакарсиз</div><div class="s">таркибида шакар йўқ</div></div>
+<div class="card" id="c2" style="left:720px;top:280px;width:480px;height:450px"><div class="ic" style="background:#ff8a00">🍊</div><div class="t">Апельсин<br>таъми</div><div class="s">ёқимли ҳид ва таъм</div></div>
+<div class="card" id="c3" style="left:1260px;top:280px;width:480px;height:450px"><div class="ic" style="background:#e5262d">1+</div><div class="t">1 ёшдан<br>бошлаб</div><div class="s">бутун оила учун</div></div>
+
+<!-- SCENE 5: dosage -->
+<div class="abs h" id="s5t" style="left:0;width:1920px;text-align:center;top:110px;font-size:80px">Кунига қанча ичилади?</div>
+<div id="doses" class="abs" style="left:150px;top:300px;width:1620px;height:440px"></div>
+<div class="abs h" id="s5n" style="left:0;width:1920px;text-align:center;top:800px;font-size:36px;font-weight:800">14 ёшдан катталарга — кунига 4 мартагача</div>
+
+<!-- SCENE 6: packshot -->
+<div class="abs" id="s6a" style="left:880px;top:200px"><span class="ribbon" style="font-size:140px">ВИТАТЕН</span></div>
+<div class="abs h" id="s6b" style="left:890px;top:420px;font-size:62px;width:960px">бутун оила<br><span class="y">саломатлиги учун!</span></div>
+<div class="abs h" id="s6c" style="left:890px;top:640px;font-size:54px;width:960px">Дорихоналардан сўранг</div>
+<div class="abs disc" id="s6d" style="left:890px;top:770px;width:900px">Қўллашдан олдин мутахассис билан маслаҳатлашинг.<br>Ишлаб чиқарувчи: «MEGAVITFARM» МЧЖ, Ўзбекистон</div>
+
+<div class="layer" id="flash" style="background:#fff"></div>
+</div>
+<script>
+const D=28;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c1=1.6,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const win=(t,a,b,f=.4)=>clamp((t-a)/f)*clamp((b-t)/f);
+function set(el,o,tf){el.style.opacity=o;el.style.transform=tf||'';el.style.visibility=o<=0.001?'hidden':'visible'}
+
+// orange slices
+function sliceSVG(r){let s=`<svg width="${2*r}" height="${2*r}" viewBox="-100 -100 200 200"><circle r="100" fill="#ff8a00"/><circle r="90" fill="#fff4d6"/><circle r="84" fill="#ffb21a"/>`;
+  for(let i=0;i<10;i++){const a=i*36*Math.PI/180;s+=`<line x1="0" y1="0" x2="${84*Math.cos(a)}" y2="${84*Math.sin(a)}" stroke="#fff4d6" stroke-width="6"/>`}
+  return s+`<circle r="10" fill="#fff4d6"/></svg>`}
+const slices=[[1500,120,110],[1700,640,140],[90,700,120],[300,90,80],[1150,820,90]].map(([x,y,r],i)=>{const d=document.createElement('div');d.className='abs';d.innerHTML=sliceSVG(r);$('oranges').appendChild(d);return {d,x,y,i}});
+const drops=Array.from({length:14},(_,i)=>{const d=document.createElement('div');d.className='drop';const s=18+((i*37)%30);d.style.width=s+'px';d.style.height=s*1.2+'px';$('oranges').appendChild(d);return {d,i,x:(i*263)%1900,s}});
+
+// orbit components
+const comps=[["A","Вит.","#ff9a1f"],["B2","Вит.","#2a7de1"],["B3","Вит.","#2a7de1"],["B5","Вит.","#2a7de1"],["B6","Вит.","#2a7de1"],["B9","Вит.","#2a7de1"],["B12","Вит.","#2a7de1"],["C","Вит.","#ffb400"],["D3","Вит.","#2fb24c"],["E","Вит.","#e5262d"],
+ ["Se","селен","#14a3a3"],["I","йод","#14a3a3"],["Fe","темир","#c0392b"],["Ca","кальций","#14a3a3"],["Zn","рух","#14a3a3"],["Mg","магний","#d64b9a"],["L-K","карнитин","#7a4bd6"],["L-A","аргинин","#7a4bd6"]];
+const orbs=comps.map(([l,s,c],i)=>{const d=document.createElement('div');d.className='orb';d.innerHTML=`${l}<small>${s}</small>`;if(l.length>2)d.style.fontSize='36px';
+  d.style.background=`radial-gradient(circle at 35% 30%,#ffffffaa 0,${c} 45%,${c} 100%)`;$('orbs').appendChild(d);return d});
+
+// doses
+const doseData=[["1–3 ёш","#ff9a1f","2,5",1],["3–6 ёш","#2fb24c","2,5",2],["6–14 ёш","#2a7de1","5",2],["14+ ёш","#e5262d","5",3]];
+const doses=doseData.map(([a,c,ml,n],i)=>{const d=document.createElement('div');d.className='dose';d.style.left=(i*416)+'px';
+  d.innerHTML=`<div class="age" style="background:${c}">${a}</div><div class="ml">${ml} <span>мл</span></div><div class="x">× ${n} марта<small>кунига</small></div><div class="spoon">${'<i></i>'.repeat(n)}</div>`;
+  $('doses').appendChild(d);return d});
+
+window.render=function(t){
+  // backgrounds
+  $('bgMorning').style.opacity=1;
+  set($('bgBlue'),clamp((t-5.6)/.5)*(1-clamp((t-15.3)/.5))+clamp((t-19.3)/.5),'');
+  set($('bgOrange'),clamp((t-15.3)/.5)*(1-clamp((t-19.3)/.5)),'');
+  const raysOn=win(t,5.4,15.5,.6)*.9+win(t,23.4,D+1,.6);
+  set($('rays'),raysOn,`rotate(${t*6}deg)`);
+
+  // flash on transitions
+  const fl=[5.6,15.3,19.3,23.4].reduce((m,a)=>Math.max(m,clamp(1-Math.abs(t-a)/.18)),0);
+  set($('flash'),fl*.85,'');
+
+  // family scene 0-5.6 and 23.4+ (in hills)
+  const famV=win(t,0,5.8,.3);
+  const sunV=win(t,0,5.8,.3);
+  set($('sun'),sunV,`translateY(${(1-eo(t/1.2))*120}px) scale(${1+Math.sin(t*2)*.03})`);
+  set($('hills'),win(t,0,5.8,.3)+win(t,23.4,D+1,.5),`translateY(${t<6?(1-eo(t/.9))*300:(1-eo((t-23.4)/.8))*300}px)`);
+  let fx=120,fy=380,fs=1;
+  if(t>=23){fx=-10;fy=640;fs=.5}
+  const fin=t<6?eo((t-.2)/1):eo((t-23.6)/.9);
+  set($('family'),famV,`translate(${fx-(1-fin)*900}px,${fy-380}px) scale(${fs})`);
+  $('family').style.transformOrigin='0 0';
+  // kids bounce
+  const jb=Math.abs(Math.sin(t*5))*22;
+  $('k1').setAttribute('transform',`translate(150,${330-jb})`);
+  $('k2').setAttribute('transform',`translate(840,${350-Math.abs(Math.sin(t*5+1.2))*22})`);
+  ['h1','h2','h3'].forEach((h,i)=>{const e=$(h);e.style.transformOrigin='center';e.style.transformBox='fill-box';
+    e.style.transform=`translateY(${-Math.sin(t*2+i)*10}px) scale(${1+Math.sin(t*4+i)*.12})`});
+
+  set($('s1a'),win(t,.5,3,.4),`translateX(${(1-eo((t-.5)/.6))*200}px)`);
+  set($('s1b'),win(t,.9,3,.4),`scale(${.6+.4*back((t-.9)/.7)})`);
+  set($('s1c'),win(t,3.1,5.6,.35),`translateY(${(1-eo((t-3.1)/.5))*60}px)`);
+
+  // product path
+  let px=0,py=0,ps=0,po=0,ry=0,rz=0;
+  if(t>=5.6&&t<10.4){const p=back((t-5.6)/1);po=clamp((t-5.6)/.2)*clamp((10.4-t)/.3);ps=.25+.75*p;px=380;py=95+Math.sin(t*2)*10;ry=(1-eo((t-5.6)/1.2))*-70+Math.sin(t*1.3)*6;rz=(1-p)*-10}
+  else if(t>=10.4&&t<15.3){po=clamp((t-10.4)/.3)*clamp((15.3-t)/.3);ps=.8;px=745;py=98+Math.sin(t*2)*8;ry=Math.sin(t*1.2)*8}
+  else if(t>=23.4){const p=back((t-23.4)/.9);po=clamp((t-23.4)/.2);ps=.2+.75*p;px=380;py=60+Math.sin(t*2)*8;ry=(1-eo((t-23.4)/1))*60+Math.sin(t*1.3)*5}
+  set($('prod'),po,`translate(${px}px,${py}px) perspective(1400px) rotateY(${ry}deg) rotate(${rz}deg) scale(${ps})`);
+  $('prod').style.transformOrigin='50% 50%';
+  $('shine').style.setProperty('--sx',(((t*0.55)%1.6)*900-300)+'px');
+  set($('glow'),po*(.8+.2*Math.sin(t*3)),`translate(${px+215-550}px,${py+442-550}px)`);
+
+  // oranges in scene 2 and 4
+  const orV=win(t,5.8,10.4,.4)+win(t,15.4,19.3,.4);
+  slices.forEach(s=>set(s.d,orV,`translate(${s.x+Math.sin(t+s.i)*20}px,${s.y+Math.cos(t*.8+s.i)*25}px) rotate(${t*(s.i%2?20:-20)}deg)`));
+  drops.forEach(d=>{const y=((t*180+d.i*140)%1300)-150;set(d.d,orV*.8,`translate(${d.x}px,${y}px)`)});
+
+  // scene 2 text
+  set($('s2a'),win(t,6.3,10.4),`scale(${back((t-6.3)/.6)})`);
+  $('s2a').style.transformOrigin='0 50%';
+  set($('s2b'),win(t,6.8,10.4),`translateY(${(1-eo((t-6.8)/.6))*50}px)`);
+  set($('s2c'),win(t,7.2,10.4),'');
+
+  // scene 3: orbit
+  const cx=960,cy=540;
+  orbs.forEach((d,i)=>{const a=i/18*Math.PI*2+t*.45;const app=10.6+i*.07;const r=430*eo((t-app)/.6);
+    const x=cx+Math.cos(a)*r*1.05-75,y=cy+Math.sin(a)*r*.82-75;const z=Math.sin(a);
+    set(d,win(t,app,15.3,.3),`translate(${x}px,${y}px) scale(${.75+.2*z})`);d.style.zIndex=z>0?5:1});
+  $('orbs').style.zIndex='';
+  const n=Math.round(clamp((t-10.8)/1.5)*18);$('s3n').textContent=n;
+  set($('s3n'),win(t,10.7,15.3),`scale(${.6+.4*back((t-10.7)/.6)})`);
+  set($('s3t'),win(t,11.1,15.3),`translateY(${(1-eo((t-11.1)/.5))*40}px)`);
+  set($('s3r'),win(t,12.2,15.3),`translateX(${(1-eo((t-12.2)/.6))*120}px)`);
+
+  // scene 4
+  set($('s4t'),win(t,15.5,19.3),`translateY(${(1-eo((t-15.5)/.5))*-60}px)`);
+  ['c1','c2','c3'].forEach((id,i)=>{const a=15.8+i*.4;set($(id),win(t,a,19.3),`translateY(${(1-back((t-a)/.7))*500}px) rotate(${Math.sin(t*1.5+i)*1.2}deg)`)});
+
+  // scene 5
+  set($('s5t'),win(t,19.5,23.4),`translateY(${(1-eo((t-19.5)/.5))*-60}px)`);
+  doses.forEach((d,i)=>{const a=19.8+i*.3;set(d,win(t,a,23.4),`translateY(${(1-back((t-a)/.6))*600}px)`)});
+  set($('s5n'),win(t,21.2,23.4),'');
+
+  // scene 6
+  set($('s6a'),win(t,23.8,D+1),`scale(${back((t-23.8)/.6)})`);$('s6a').style.transformOrigin='0 50%';
+  set($('s6b'),win(t,24.2,D+1),`translateX(${(1-eo((t-24.2)/.6))*100}px)`);
+  set($('s6c'),win(t,24.8,D+1),`scale(${.7+.3*back((t-24.8)/.6)})`);$('s6c').style.transformOrigin='0 50%';
+  set($('s6d'),win(t,25.3,D+1),'');
+};
+window.DURATION=D;
+render(0);
+</script>
+</body></html>
