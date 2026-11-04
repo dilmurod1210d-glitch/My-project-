@@ -1,0 +1,279 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;src:local("Inter")}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#070b24;font-family:Inter,"DejaVu Sans",sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+#bg{inset:0;background:radial-gradient(1200px 900px at 20% 10%,#2b1a7a 0%,transparent 60%),radial-gradient(1000px 900px at 90% 70%,#06607a 0%,transparent 60%),linear-gradient(180deg,#0a0f2e,#060820)}
+.blob{border-radius:50%;filter:blur(60px);opacity:.55}
+#grid{inset:-200px;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:90px 90px}
+/* logo */
+#logo{left:0;right:0;top:120px;display:flex;justify-content:center;align-items:center;gap:18px}
+.mark{width:74px;height:74px;border-radius:22px;background:linear-gradient(135deg,#7c5cff,#20d3ff);display:grid;place-items:center;font-weight:900;font-size:44px;box-shadow:0 10px 40px rgba(64,180,255,.45)}
+.brand{font-size:50px;font-weight:800;letter-spacing:1px}
+.scene{left:0;right:0;top:250px;height:820px;display:flex;align-items:center;justify-content:center}
+/* scene1 */
+#yang{font-size:190px;font-weight:900;letter-spacing:-4px;background:linear-gradient(90deg,#ffe066,#ff8a3d,#ff4fa3);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 12px 40px rgba(255,120,80,.45))}
+.ray{width:14px;height:120px;border-radius:7px;background:linear-gradient(#ffe066,#ff4fa3);left:50%;top:50%;transform-origin:50% 0}
+#s1sub{top:640px;left:0;right:0;text-align:center;font-size:50px;font-weight:700}
+#s1sub span{display:inline-block;padding:14px 34px;border-radius:40px;background:rgba(5,8,30,.8);border:2px solid rgba(255,255,255,.18)}
+/* browser */
+#browser{width:860px;height:600px;border-radius:34px;background:#0f1640;border:2px solid rgba(255,255,255,.12);box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 1px rgba(124,92,255,.3);overflow:hidden}
+.bar{height:78px;background:#151d52;display:flex;align-items:center;padding:0 26px;gap:12px}
+.dot{width:20px;height:20px;border-radius:50%}
+.url{margin-left:20px;flex:1;height:46px;border-radius:23px;background:#0a1036;display:flex;align-items:center;padding:0 22px;font-size:28px;color:#b9c4ff;gap:10px}
+.prog{height:6px;background:linear-gradient(90deg,#7c5cff,#20d3ff)}
+.hero{padding:40px 46px}
+.hline{height:30px;border-radius:15px;background:rgba(255,255,255,.12);margin-bottom:18px}
+.btn{display:inline-block;padding:18px 40px;border-radius:40px;background:linear-gradient(90deg,#7c5cff,#20d3ff);font-weight:800;font-size:30px;margin-top:16px}
+.tiles{display:flex;gap:20px;margin-top:34px}
+.tile{flex:1;height:150px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+#launch{left:0;right:0;top:40px;text-align:center}
+.pill{display:inline-block;padding:16px 36px;border-radius:50px;background:linear-gradient(90deg,#16e0a0,#20d3ff);color:#04112a;font-weight:900;font-size:46px;box-shadow:0 14px 50px rgba(32,211,255,.45)}
+#rocket{font-size:150px}
+.conf{width:18px;height:30px;border-radius:4px}
+/* features */
+#feat{width:900px;display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.card{height:300px;border-radius:36px;padding:34px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1.5px solid rgba(255,255,255,.16);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.ic{width:96px;height:96px;border-radius:28px;display:grid;place-items:center;font-size:54px;margin-bottom:24px}
+.ct{font-size:46px;font-weight:800}
+.cs{font-size:28px;opacity:.7;margin-top:8px}
+#ftitle{top:0;left:0;right:0;text-align:center;font-size:58px;font-weight:800}
+/* devices */
+#laptop{width:640px;height:420px;border-radius:26px 26px 0 0;background:#0f1640;border:14px solid #222b66;border-bottom:none}
+#laptopbase{width:780px;height:34px;border-radius:0 0 30px 30px;background:#2a3478}
+#phone{width:280px;height:560px;border-radius:48px;background:#0f1640;border:12px solid #2a3478;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden}
+.scr{padding:22px}
+#b247{width:260px;height:260px;border-radius:50%;background:conic-gradient(#16e0a0,#20d3ff,#7c5cff,#ff4fa3,#16e0a0);display:grid;place-items:center;box-shadow:0 0 80px rgba(32,211,255,.5)}
+#b247 div{width:220px;height:220px;border-radius:50%;background:#0a0f2e;display:grid;place-items:center;font-size:82px;font-weight:900}
+.chip{padding:16px 30px;border-radius:40px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:36px;font-weight:700}
+/* cta */
+#ctaurl{padding:34px 60px;border-radius:70px;background:#fff;color:#0a0f2e;font-size:84px;font-weight:900;letter-spacing:-1px;box-shadow:0 20px 80px rgba(124,92,255,.6)}
+#cursor{width:80px;height:80px}
+#ctah{font-size:72px;font-weight:900;text-align:center;line-height:1.1}
+.grad{background:linear-gradient(90deg,#ffe066,#ff8a3d,#ff4fa3);-webkit-background-clip:text;color:transparent}
+/* subtitle + characters */
+#sub{left:70px;right:70px;top:1085px;min-height:150px;display:flex;align-items:center;justify-content:center}
+#subbox{padding:24px 38px;border-radius:34px;background:rgba(5,8,30,.72);border:2px solid rgba(255,255,255,.14);font-size:44px;font-weight:700;line-height:1.28;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+#subbox b{color:#ffe066}
+.who{font-size:28px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.char{top:1305px;width:330px;height:360px}
+.nm{position:absolute;left:0;right:0;bottom:-6px;text-align:center}
+.nm span{display:inline-block;padding:8px 26px;border-radius:24px;font-size:30px;font-weight:800}
+</style></head>
+<body><div id="stage">
+<div id="bg" class="abs"></div>
+<div id="grid" class="abs"></div>
+<div class="abs blob" id="blob1" style="width:500px;height:500px;background:#7c5cff"></div>
+<div class="abs blob" id="blob2" style="width:420px;height:420px;background:#20d3ff"></div>
+<div class="abs blob" id="blob3" style="width:360px;height:360px;background:#ff4fa3"></div>
+
+<div id="logo" class="abs"><div class="mark">N</div><div class="brand" id="brandName">NovaTech</div></div>
+
+<!-- Scene 1 -->
+<div id="s1" class="abs scene">
+  <div id="rays" class="abs" style="left:0;top:0;width:100%;height:100%"></div>
+  <div id="yang">YANGILIK!</div>
+  <div id="s1sub" class="abs"><span>Siz uchun katta xabar 📣</span></div>
+</div>
+
+<!-- Scene 2 -->
+<div id="s2" class="abs scene">
+  <div id="launch" class="abs"><span class="pill" id="pill">🚀 SAYT ISHGA TUSHDI!</span></div>
+  <div id="browser">
+    <div class="bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div>
+      <div class="url">🔒 <span id="typed"></span><span id="caret" style="width:3px;height:30px;background:#b9c4ff;display:inline-block"></span></div></div>
+    <div class="prog" id="prog"></div>
+    <div class="hero" id="hero">
+      <div style="font-size:54px;font-weight:900;margin-bottom:12px" id="htitle">Xush kelibsiz!</div>
+      <div class="hline" style="width:80%"></div><div class="hline" style="width:60%"></div>
+      <div class="btn">Buyurtma berish</div>
+      <div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+    </div>
+  </div>
+  <div id="confetti" class="abs" style="inset:0"></div>
+</div>
+
+<!-- Scene 3 -->
+<div id="s3" class="abs scene" style="flex-direction:column">
+  <div id="ftitle" class="abs">Saytda <span class="grad">hammasi bor</span></div>
+  <div id="feat" style="margin-top:110px">
+    <div class="card"><div class="ic" style="background:#7c5cff">🛠️</div><div class="ct">Xizmatlar</div><div class="cs">To'liq ro'yxat</div></div>
+    <div class="card"><div class="ic" style="background:#ff8a3d">💰</div><div class="ct">Narxlar</div><div class="cs">Ochiq va aniq</div></div>
+    <div class="card"><div class="ic" style="background:#ff4fa3">📰</div><div class="ct">Yangiliklar</div><div class="cs">Doim yangi</div></div>
+    <div class="card"><div class="ic" style="background:#16e0a0">🛒</div><div class="ct">Onlayn buyurtma</div><div class="cs">Bir necha daqiqada</div></div>
+  </div>
+</div>
+
+<!-- Scene 4 -->
+<div id="s4" class="abs scene">
+  <div class="abs" id="lapwrap" style="left:120px;top:150px">
+    <div id="laptop"><div class="hero" style="padding:30px"><div style="font-size:40px;font-weight:900;margin-bottom:14px">NovaTech</div><div class="hline" style="width:70%"></div><div class="hline" style="width:50%"></div><div class="tiles" style="margin-top:20px"><div class="tile" style="height:110px"></div><div class="tile" style="height:110px"></div></div></div></div>
+    <div id="laptopbase" style="margin-left:-70px"></div>
+  </div>
+  <div class="abs" id="phwrap" style="left:640px;top:120px">
+    <div id="phone"><div class="scr"><div style="width:90px;height:10px;border-radius:5px;background:#2a3478;margin:0 auto 26px"></div>
+      <div style="font-size:30px;font-weight:900;margin-bottom:16px">NovaTech</div><div class="hline" style="height:22px"></div><div class="hline" style="height:22px;width:70%"></div>
+      <div class="btn" style="font-size:22px;padding:14px 24px">Buyurtma</div>
+      <div class="tile" style="height:120px;margin-top:22px"></div></div></div>
+  </div>
+  <div class="abs" id="b247wrap" style="left:60px;top:540px"><div id="b247"><div>24/7</div></div></div>
+  <div class="abs chip" id="chip1" style="left:380px;top:640px">⚡ Tez</div>
+  <div class="abs chip" id="chip2" style="left:620px;top:720px">📱 Har qurilmada</div>
+</div>
+
+<!-- Scene 5 -->
+<div id="s5" class="abs scene" style="flex-direction:column;gap:50px">
+  <div id="ctah">Hoziroq<br><span class="grad">tashrif buyuring!</span></div>
+  <div style="position:relative"><div id="ctaurl"><span id="dom">novatech.uz</span></div>
+    <svg id="cursor" class="abs" viewBox="0 0 24 24" style="right:-30px;bottom:-50px"><path d="M3 2l7 19 2.5-7.5L20 11z" fill="#fff" stroke="#0a0f2e" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    <div id="ripple" class="abs" style="width:60px;height:60px;border-radius:50%;border:5px solid #fff;right:-10px;bottom:-30px"></div></div>
+  <div id="thanks" style="font-size:52px;font-weight:800;opacity:.95">Rahmat! 💜</div>
+</div>
+
+<div id="sub" class="abs"><div id="subbox"></div></div>
+
+<!-- characters -->
+<div class="abs char" id="cM" style="left:70px"><svg viewBox="0 0 330 360" width="330" height="360">
+  <ellipse cx="165" cy="350" rx="120" ry="12" fill="rgba(0,0,0,.35)"/>
+  <g id="mBody"><path d="M45 360 Q50 250 165 240 Q280 250 285 360Z" fill="#7c5cff"/><path d="M140 245 L165 300 L190 245Z" fill="#fff"/>
+  <g id="mHead"><path d="M78 150 Q70 50 165 45 Q262 50 252 150 Q262 230 240 250 L90 250 Q68 230 78 150Z" fill="#2b1608"/>
+  <rect x="148" y="200" width="34" height="46" rx="12" fill="#e9b48f"/>
+  <ellipse cx="165" cy="150" rx="72" ry="84" fill="#f2c4a0"/>
+  <path d="M93 130 Q110 60 175 70 Q230 72 240 135 Q225 95 170 95 Q120 95 93 130Z" fill="#2b1608"/>
+  <circle cx="165" cy="48" r="30" fill="#2b1608"/>
+  <ellipse cx="96" cy="160" rx="10" ry="16" fill="#e9b48f"/><ellipse cx="234" cy="160" rx="10" ry="16" fill="#e9b48f"/>
+  <circle cx="96" cy="178" r="5" fill="#ffd34d"/><circle cx="234" cy="178" r="5" fill="#ffd34d"/>
+  <g id="mEyes"><ellipse cx="138" cy="150" rx="8" ry="10" fill="#1b1030"/><ellipse cx="192" cy="150" rx="8" ry="10" fill="#1b1030"/></g>
+  <path d="M124 128 Q138 120 152 128" stroke="#2b1608" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M178 128 Q192 120 206 128" stroke="#2b1608" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="118" cy="182" rx="13" ry="8" fill="#ff8fa3" opacity=".55"/><ellipse cx="212" cy="182" rx="13" ry="8" fill="#ff8fa3" opacity=".55"/>
+  <ellipse id="mMouth" cx="165" cy="196" rx="16" ry="4" fill="#9c2742"/></g></g>
+  </svg><div class="nm"><span style="background:#7c5cff">Madina</span></div></div>
+
+<div class="abs char" id="cS" style="right:70px"><svg viewBox="0 0 330 360" width="330" height="360">
+  <ellipse cx="165" cy="350" rx="120" ry="12" fill="rgba(0,0,0,.35)"/>
+  <g id="sBody"><path d="M45 360 Q50 250 165 240 Q280 250 285 360Z" fill="#0aa6c9"/><path d="M135 243 L165 290 L195 243Z" fill="#fff"/><path d="M158 262 L172 262 L176 330 L165 345 L154 330Z" fill="#0a0f2e"/>
+  <g id="sHead"><rect x="148" y="200" width="34" height="46" rx="12" fill="#c98c62"/>
+  <ellipse cx="165" cy="150" rx="70" ry="82" fill="#dca37a"/>
+  <path d="M95 135 Q90 60 165 58 Q245 60 236 135 Q228 100 200 92 Q160 110 110 100 Q100 115 95 135Z" fill="#1a1a2e"/>
+  <ellipse cx="96" cy="158" rx="10" ry="16" fill="#c98c62"/><ellipse cx="234" cy="158" rx="10" ry="16" fill="#c98c62"/>
+  <g id="sEyes"><ellipse cx="138" cy="150" rx="8" ry="10" fill="#1b1030"/><ellipse cx="192" cy="150" rx="8" ry="10" fill="#1b1030"/></g>
+  <path d="M122 126 L154 124" stroke="#1a1a2e" stroke-width="7" stroke-linecap="round"/><path d="M176 124 L208 126" stroke="#1a1a2e" stroke-width="7" stroke-linecap="round"/>
+  <ellipse id="sMouth" cx="165" cy="196" rx="16" ry="4" fill="#7a2030"/></g></g>
+  </svg><div class="nm"><span style="background:#0aa6c9">Sardor</span></div></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lerp=(a,b,x)=>a+(b-a)*x;
+const eo=x=>1-Math.pow(1-clamp(x),3);
+const eback=x=>{x=clamp(x);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const prog=(t,a,d)=>clamp((t-a)/d);
+let TL=null;
+// confetti + rays setup (deterministic)
+function rnd(s){return()=>{s=(s*16807)%2147483647;return s/2147483647}}
+const R=rnd(7), conf=[];
+const colors=['#ffe066','#ff4fa3','#20d3ff','#16e0a0','#7c5cff','#ff8a3d'];
+for(let i=0;i<70;i++){const d=document.createElement('div');d.className='abs conf';d.style.background=colors[i%6];$('confetti').appendChild(d);
+  conf.push({el:d,a:R()*Math.PI*2,v:500+R()*700,rot:R()*720-360,dl:R()*0.25})}
+const rays=[];for(let i=0;i<16;i++){const d=document.createElement('div');d.className='abs ray';$('rays').appendChild(d);rays.push(d)}
+
+function sceneVis(el,t,a,b,kind){ // enter/exit
+  const din=0.45,dout=0.35;
+  if(t<a-0.01||t>b+dout){el.style.display='none';return 0}
+  el.style.display='flex';
+  const pi=eo(prog(t,a,din)), po=prog(t,b,dout);
+  const s=lerp(0.85,1,pi)*lerp(1,1.08,po), y=lerp(80,0,pi)+lerp(0,-60,po);
+  el.style.opacity=pi*(1-po); el.style.transform=`translateY(${y}px) scale(${s})`;
+  return pi*(1-po);
+}
+
+window.render=function(t){
+  const L=TL.lines, st=i=>L[i].start, en=i=>L[i].end;
+  // background motion
+  $('blob1').style.transform=`translate(${-100+80*Math.sin(t*.5)}px,${200+60*Math.cos(t*.4)}px)`;
+  $('blob2').style.transform=`translate(${700+70*Math.cos(t*.45)}px,${900+80*Math.sin(t*.35)}px)`;
+  $('blob3').style.transform=`translate(${600+90*Math.sin(t*.3+1)}px,${50+70*Math.cos(t*.5)}px)`;
+  $('grid').style.transform=`translate(${(t*20)%90}px,${(t*30)%90}px)`;
+  const lg=eback(prog(t,0.1,0.6));$('logo').style.opacity=clamp(t/0.4);$('logo').style.transform=`scale(${lerp(.6,1,lg)})`;
+
+  // scene windows
+  const S1=[0.15,st(1)-0.3],S2=[st(1)-0.3,st(3)-0.3],S3=[st(3)-0.3,st(5)-0.3],S4=[st(5)-0.3,st(7)-0.3],S5=[st(7)-0.3,99];
+  // S1
+  if(sceneVis($('s1'),t,...S1)){
+    const p=eback(prog(t,0.3,0.55)); const pulse=1+0.04*Math.sin(t*9);
+    $('yang').style.transform=`scale(${lerp(0.2,1,p)*pulse}) rotate(${lerp(-12,-3,p)}deg)`;
+    rays.forEach((r,i)=>{const a=i/16*360+t*20;const len=lerp(0,1,eo(prog(t,0.4,0.6)));r.style.transform=`rotate(${a}deg) translateY(${260+30*Math.sin(t*6+i)}px) scaleY(${len})`;r.style.opacity=.55});
+    const ps=eo(prog(t,1.2,0.5));$('s1sub').style.opacity=ps;$('s1sub').style.transform=`translateY(${lerp(30,0,ps)}px)`;
+  }
+  // S2 browser
+  if(sceneVis($('s2'),t,...S2)){
+    const dom=TL.domain, tp=prog(t,S2[0]+0.4,1.4); $('typed').textContent=dom.slice(0,Math.round(dom.length*tp));
+    $('caret').style.opacity=(Math.floor(t*3)%2)?1:0;
+    const lp=prog(t,st(2)-0.2,1.1); $('prog').style.width=(lp*100)+'%';$('prog').style.opacity=lp<1?1:0;
+    $('hero').style.opacity=eo(prog(t,st(2)+0.7,0.4));
+    const lt=st(2)+0.9, pp=eback(prog(t,lt,0.5));
+    $('launch').style.opacity=clamp((t-lt)/0.2);$('pill').style.display='inline-block';$('pill').style.transform=`scale(${lerp(0.3,1,pp)})`;
+    $('browser').style.transform=`translateY(${60+6*Math.sin(t*2)}px)`;
+    conf.forEach(c=>{const k=t-lt-c.dl; if(k<0){c.el.style.opacity=0;return}
+      const x=540+Math.cos(c.a)*c.v*k, y=400+Math.sin(c.a)*c.v*k*0.8+900*k*k;
+      c.el.style.opacity=clamp(1-k/1.8);c.el.style.transform=`translate(${x}px,${y}px) rotate(${c.rot*k}deg)`});
+  }
+  // S3 features
+  if(sceneVis($('s3'),t,...S3)){
+    const cards=document.querySelectorAll('.card'), c0=st(4), cd=en(4)-c0;
+    $('ftitle').style.opacity=eo(prog(t,S3[0]+0.2,0.4));
+    cards.forEach((c,i)=>{const p=eback(prog(t,c0+0.15+i*cd*0.22,0.45));
+      c.style.opacity=clamp(p*1.5);c.style.transform=`translateY(${lerp(120,0,p)+8*Math.sin(t*2+i)}px) scale(${lerp(.6,1,p)})`});
+  }
+  // S4 devices
+  if(sceneVis($('s4'),t,...S4)){
+    const a=S4[0];
+    const pl=eo(prog(t,a+0.2,0.6)), pp=eback(prog(t,a+0.5,0.6));
+    $('lapwrap').style.transform=`translateX(${lerp(-500,0,pl)}px)`;$('lapwrap').style.opacity=pl;
+    $('phwrap').style.transform=`translateY(${lerp(500,0,pp)+10*Math.sin(t*2.2)}px) rotate(${lerp(20,6,pp)}deg)`;
+    const b=eback(prog(t,en(6)-1.6,0.6));$('b247wrap').style.transform=`scale(${b}) rotate(${t*10}deg)`;
+    $('b247wrap').querySelector('#b247 div').style.transform=`rotate(${-t*10}deg)`;
+    const c1=eback(prog(t,st(6)+0.6,0.4)),c2=eback(prog(t,st(6)+1.5,0.4));
+    $('chip1').style.transform=`scale(${c1})`;$('chip2').style.transform=`scale(${c2})`;
+  }
+  // S5 CTA
+  if(sceneVis($('s5'),t,...S5)){
+    const a=S5[0];
+    const h=eback(prog(t,a+0.15,0.5));$('ctah').style.transform=`scale(${h})`;
+    const u=eback(prog(t,a+0.35,0.5)), click=st(7)+0.9, cp=prog(t,click,0.25);
+    const press=cp>0&&cp<1?1-0.08*Math.sin(cp*Math.PI):1;
+    $('ctaurl').style.transform=`scale(${u*press*(1+0.02*Math.sin(t*5))})`;
+    const cm=eo(prog(t,a+0.4,0.5));$('cursor').style.transform=`translate(${lerp(260,0,cm)}px,${lerp(200,0,cm)}px) scale(${cp>0&&cp<1?0.85:1})`;
+    const rp=prog(t,click,0.6);$('ripple').style.opacity=rp>0&&rp<1?1-rp:0;$('ripple').style.transform=`scale(${1+rp*3})`;
+    const th=eback(prog(t,st(8),0.5));$('thanks').style.opacity=clamp(th);$('thanks').style.transform=`scale(${lerp(.5,1,th)})`;
+  }
+  // subtitles
+  let cur=null;for(const l of L){if(t>=l.start-0.12&&t<=l.end+0.22)cur=l}
+  const sb=$('subbox');
+  if(cur){
+    const words=cur.text.replace(/novatech nuqta uz/i,TL.domain).split(' ');
+    const fr=clamp((t-cur.start)/(cur.end-cur.start)); const nShown=Math.ceil(fr*words.length);
+    const col=cur.who==='M'?'#b9a6ff':'#7fe7ff', name=cur.who==='M'?'Madina':'Sardor';
+    sb.innerHTML=`<div class="who" style="color:${col}">${name}</div>`+words.map((w,i)=>i<nShown?`<b>${w}</b>`:w).join(' ');
+    const p=eo(prog(t,cur.start-0.12,0.25));sb.style.opacity=p;sb.style.transform=`translateY(${lerp(20,0,p)}px) scale(${lerp(.95,1,p)})`;
+    sb.style.display='block';sb.style.fontSize=(cur.text.length>80?39:44)+'px';
+  } else sb.style.display='none';
+  // characters
+  const fi=Math.min(TL.env.M.length-1,Math.floor(t*TL.fps));
+  [['M','m','cM'],['S','s','cS']].forEach(([k,p,id],j)=>{
+    const e=clamp(TL.env[k][fi]||0,0,1.1); const speaking=cur&&cur.who===k;
+    const ent=eback(prog(t,0.2+j*0.2,0.6));
+    const sc=speaking?1.06:0.94;
+    $(id).style.transform=`translateY(${lerp(400,0,ent)+(speaking?-6*Math.abs(Math.sin(t*7)):0)}px) scale(${sc})`;
+    $(id).style.opacity=speaking||!cur?1:0.75;
+    $(p+'Mouth').setAttribute('ry',4+e*16);$(p+'Mouth').setAttribute('rx',16-e*3);
+    const blink=((t+j*1.3)%3.2)<0.12;$(p+'Eyes').setAttribute('transform',blink?'translate(0,150) scale(1,0.1) translate(0,-150)':'');
+    $(p+'Head').setAttribute('transform',`rotate(${(speaking?3:1.2)*Math.sin(t*(speaking?4:1.5)+j)} 165 200)`);
+  });
+};
+window.init=function(tl){TL=tl;$('brandName').textContent=tl.brand;$('dom').textContent=tl.domain;document.querySelector('.mark').textContent=tl.brand[0];};
+</script></body></html>

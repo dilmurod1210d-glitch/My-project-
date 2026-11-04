@@ -1,0 +1,12 @@
+{"brand": "NovaTech", "domain": "novatech.uz",
+ "lines": [
+  {"who": "M", "text": "Assalomu alaykum! Bugun sizga juda katta yangilik bor!"},
+  {"who": "S", "text": "Rostdanmi? Qanday yangilik ekan?"},
+  {"who": "M", "text": "Kompaniyamizning yangi rasmiy sayti ishga tushdi!"},
+  {"who": "S", "text": "Zo'r-ku! Saytda nimalar bor?"},
+  {"who": "M", "text": "Barcha xizmatlar, narxlar va yangiliklar endi bir joyda. Buyurtmani esa bir necha daqiqada onlayn berasiz."},
+  {"who": "S", "text": "Telefondan ham qulaymi?"},
+  {"who": "M", "text": "Albatta! Sayt istalgan qurilmada tez ishlaydi va sizga kecha-kunduz xizmat qiladi."},
+  {"who": "S", "text": "Unda hoziroq kiring: novatech nuqta uz!"},
+  {"who": "M", "text": "Bizni tanlaganingiz uchun rahmat!"}
+ ]}
