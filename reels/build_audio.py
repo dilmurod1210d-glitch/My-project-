@@ -11,7 +11,7 @@ def read_wav(p):
         a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
     return a
 
-START, GAP = 0.55, 0.27
+START, GAP = 0.45, 0.25
 t = START
 voice = {"M": np.zeros(N, np.float32), "S": np.zeros(N, np.float32)}
 tl = []
@@ -119,6 +119,6 @@ st = np.stack([mix, mix], 1)
 with wave.open("build/final_audio.wav", "w") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((st * 32767).astype(np.int16).tobytes())
-json.dump({"brand": script["brand"], "domain": script["domain"], "fps": FPS, "duration": DUR,
+json.dump({"brand": script["brand"], "mark": script.get("mark", script["brand"][0]), "domain": script["domain"], "fps": FPS, "duration": DUR,
            "lines": tl, "env": env}, open("build/timeline.json", "w"))
 print(json.dumps(tl, ensure_ascii=False, indent=0)[:1500])

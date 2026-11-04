@@ -11,7 +11,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#070b24;font-fam
 #grid{inset:-200px;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:90px 90px}
 /* logo */
 #logo{left:0;right:0;top:120px;display:flex;justify-content:center;align-items:center;gap:18px}
-.mark{width:74px;height:74px;border-radius:22px;background:linear-gradient(135deg,#7c5cff,#20d3ff);display:grid;place-items:center;font-weight:900;font-size:44px;box-shadow:0 10px 40px rgba(64,180,255,.45)}
+.mark{width:74px;font-size:34px!important;letter-spacing:-1px;height:74px;border-radius:22px;background:linear-gradient(135deg,#7c5cff,#20d3ff);display:grid;place-items:center;font-weight:900;font-size:44px;box-shadow:0 10px 40px rgba(64,180,255,.45)}
 .brand{font-size:50px;font-weight:800;letter-spacing:1px}
 .scene{left:0;right:0;top:250px;height:820px;display:flex;align-items:center;justify-content:center}
 /* scene1 */
@@ -110,12 +110,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#070b24;font-fam
 <!-- Scene 4 -->
 <div id="s4" class="abs scene">
   <div class="abs" id="lapwrap" style="left:120px;top:150px">
-    <div id="laptop"><div class="hero" style="padding:30px"><div style="font-size:40px;font-weight:900;margin-bottom:14px">NovaTech</div><div class="hline" style="width:70%"></div><div class="hline" style="width:50%"></div><div class="tiles" style="margin-top:20px"><div class="tile" style="height:110px"></div><div class="tile" style="height:110px"></div></div></div></div>
+    <div id="laptop"><div class="hero" style="padding:30px"><div class="bn" style="font-size:40px;font-weight:900;margin-bottom:14px">NovaTech</div><div class="hline" style="width:70%"></div><div class="hline" style="width:50%"></div><div class="tiles" style="margin-top:20px"><div class="tile" style="height:110px"></div><div class="tile" style="height:110px"></div></div></div></div>
     <div id="laptopbase" style="margin-left:-70px"></div>
   </div>
   <div class="abs" id="phwrap" style="left:640px;top:120px">
     <div id="phone"><div class="scr"><div style="width:90px;height:10px;border-radius:5px;background:#2a3478;margin:0 auto 26px"></div>
-      <div style="font-size:30px;font-weight:900;margin-bottom:16px">NovaTech</div><div class="hline" style="height:22px"></div><div class="hline" style="height:22px;width:70%"></div>
+      <div class="bn" style="font-size:24px;font-weight:900;margin-bottom:16px;white-space:nowrap">NovaTech</div><div class="hline" style="height:22px"></div><div class="hline" style="height:22px;width:70%"></div>
       <div class="btn" style="font-size:22px;padding:14px 24px">Buyurtma</div>
       <div class="tile" style="height:120px;margin-top:22px"></div></div></div>
   </div>
@@ -255,7 +255,7 @@ window.render=function(t){
   let cur=null;for(const l of L){if(t>=l.start-0.12&&t<=l.end+0.22)cur=l}
   const sb=$('subbox');
   if(cur){
-    const words=cur.text.replace(/novatech nuqta uz/i,TL.domain).split(' ');
+    const words=cur.text.replace(/\S+ nuqta uz/i,TL.domain).split(' ');
     const fr=clamp((t-cur.start)/(cur.end-cur.start)); const nShown=Math.ceil(fr*words.length);
     const col=cur.who==='M'?'#b9a6ff':'#7fe7ff', name=cur.who==='M'?'Madina':'Sardor';
     sb.innerHTML=`<div class="who" style="color:${col}">${name}</div>`+words.map((w,i)=>i<nShown?`<b>${w}</b>`:w).join(' ');
@@ -275,5 +275,5 @@ window.render=function(t){
     $(p+'Head').setAttribute('transform',`rotate(${(speaking?3:1.2)*Math.sin(t*(speaking?4:1.5)+j)} 165 200)`);
   });
 };
-window.init=function(tl){TL=tl;$('brandName').textContent=tl.brand;$('dom').textContent=tl.domain;document.querySelector('.mark').textContent=tl.brand[0];};
+window.init=function(tl){TL=tl;$('brandName').textContent=tl.brand;$('dom').textContent=tl.domain;document.querySelector('.mark').textContent=tl.mark;document.querySelectorAll('.bn').forEach(e=>e.textContent=tl.brand);};
 </script></body></html>
