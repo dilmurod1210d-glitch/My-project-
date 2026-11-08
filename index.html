@@ -46,7 +46,7 @@
   .tile__media.tile__media--pack { background: #fff; }
   .tile__media--pack > img { object-fit: contain; padding: 4%; }
   #range .tile { --tile-ratio: 5 / 4; }
-  @media (min-width: 1024px) { #range .grid > .tile.span-6 { --tile-ratio: 10 / 9; } }
+  @media (min-width: 1024px) { #range .grid > .tile.span-6 { --tile-ratio: 20 / 19; } }
   /* the tablet's footer: the contact column takes the rest of the row the link columns leave */
   @media (min-width: 640px) and (max-width: 1023px) { .footer .footer__col:last-child { grid-column: auto / span 6; } }
   .footer__col a { overflow-wrap: anywhere; }
@@ -61,7 +61,7 @@
   /* the phone sets each category as a row: the pack on the left, its name and line beside it */
   @media (max-width: 639px) {
     #range .grid > .tile { grid-column: 1 / -1; }
-    #range .tile { --tile-ratio: 1 / 1; grid-template-columns: 164px minmax(0, 1fr); column-gap: var(--s-4); row-gap: var(--s-2); }
+    #range .tile { --tile-ratio: 1 / 1; grid-template-columns: min(176px, 46%) minmax(0, 1fr); column-gap: var(--s-4); row-gap: var(--s-2); }
     #range .tile__media { grid-row: 1 / span 2; }
     #range .tile__head { flex-wrap: wrap; gap: 0 var(--s-2); }
     #range .tile__head > h3 { min-width: 0; }
@@ -74,8 +74,13 @@
   @media (max-width: 1023px) { .develop { height: auto; aspect-ratio: 4 / 3; margin-top: var(--s-7); } }
   .contact-phones a { font-variant-numeric: tabular-nums; }
   .contact-phones .rows__value { white-space: nowrap; max-width: none; }
-  .order__media { margin-top: var(--s-5); aspect-ratio: 4 / 1; background: #fff; }
-  @media (max-width: 639px) { .order__media { aspect-ratio: 3 / 1; } }
+  .order__media { aspect-ratio: 3 / 2; background: #fff; }
+  @media (min-width: 640px) and (max-width: 1023px) { #order { --h: 2; } }
+  @media (max-width: 639px) { .order__media { aspect-ratio: 1; } #range .grid { row-gap: var(--s-7); } }
+  .contact-phones { margin-top: var(--s-6); }
+  /* the hero's line-up: seven packs from 640px, three on a phone so each stays readable */
+  .hero__stage > .lineup--phone { display: none; }
+  @media (max-width: 639px) { .hero__stage > .lineup--wide { display: none; } .hero__stage > .lineup--phone { display: block; } }
   .order__media > .frame__img { object-fit: contain; }
   /* Uzbek Cyrillic words run long: the phone h1 steps down so the headline keeps to two lines */
   @media (max-width: 639px) { .hero--product { --ly-h1: 31px; } }
@@ -144,7 +149,8 @@
         <div class="btn-row"><a class="btn btn--primary" href="#order">Буюртма бериш<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#range">Тоифаларни кўриш</a></div>
       </div>
       <div class="hero__stage">
-        <img class="is-cutout" src="img/lineup.webp" srcset="img/lineup-phone.webp 1493w, img/lineup.webp 3300w" sizes="(max-width: 639px) 342px, 1280px" alt="Детрино, Серебрал, Гемовит, Уранефрит, Бронхопол, Лафия-П ва Седадокс қадоқлари бир қаторда" width="3300" height="980" fetchpriority="high" data-source="client" data-subject="the client's own product boxes">
+        <img class="is-cutout lineup--wide" src="img/lineup.webp" alt="Детрино, Серебрал, Гемовит, Уранефрит, Бронхопол, Лафия-П ва Седадокс қадоқлари бир қаторда" width="3300" height="980" fetchpriority="high" data-source="client" data-subject="the client's own product boxes">
+        <img class="is-cutout lineup--phone" src="img/lineup-phone.webp" alt="Серебрал, Гемовит ва Уранефрит қадоқлари" width="1493" height="980" loading="lazy" data-source="client" data-subject="the client's own product boxes">
       </div>
     </div></div>
   </section>
@@ -238,15 +244,10 @@
       <div class="grid grid--top">
         <div class="span-6">
           <div class="section-head">
-            <h2 id="order-h">Дорихона ва дистрибьюторлар учун буюртма</h2>
+            <h2 id="order-h">Дорихоналар учун буюртма</h2>
             <p>Минимал буюртма, нарх ва етказиб бериш шартларини телефонда айтиб берамиз. Ёки формани тўлдиринг, ўзимиз қўнғироқ қиламиз.</p>
           </div>
-          <ul class="rows contact-phones">
-            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998912740000">91 274 00 00</a></span></li>
-            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998975840000">97 584 00 00</a></span></li>
-            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998902547000">90 254 70 00</a></span></li>
-          </ul>
-          <div class="frame frame--photo order__media"><img class="frame__img" src="img/packs-tablets.webp" alt="Кальмакс Д3, Магпарим B6, Цинк Актив, Аксон Энерджи ва Гелмаксон таблеткалари қадоқлари" width="1400" height="288" loading="lazy" data-source="client"></div>
+          <div class="frame frame--photo order__media"><img class="frame__img" src="img/packs-tablets.webp" alt="Кальмакс Д3, Магпарим B6, Цинк Актив, Аксон Энерджи ва Гелмаксон таблеткалари қадоқлари" width="1600" height="1200" loading="lazy" data-source="client"></div>
         </div>
         <div class="span-6 start-7">
           <form class="form" action="mailto:aksonmegavit@gmail.com" method="post" enctype="text/plain" data-endpoint="" data-sent="Буюртмангиз қабул қилинди. Бир иш куни ичида қўнғироқ қиламиз." novalidate>
@@ -266,6 +267,11 @@
             <p class="form__status" role="status" data-form-status></p>
             <p class="t-small muted">Бир иш куни ичида жавоб берамиз.</p>
           </form>
+          <ul class="rows contact-phones">
+            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998912740000">91 274 00 00</a></span></li>
+            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998975840000">97 584 00 00</a></span></li>
+            <li><span class="rows__name">Сотув бўлими</span><span class="rows__value"><a class="link" href="tel:+998902547000">90 254 70 00</a></span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -288,7 +294,7 @@
           <p class="footer__lede">2017 йилдан Андижонда биологик фаол қўшимчалар ишлаб чиқарамиз.</p>
         </div>
         <div class="span-2 footer__col"><h3>Маҳсулотлар</h3><ul><li><a href="#range">Тоифалар</a></li><li><a href="#new">Янгилари</a></li><li><a href="https://aksonmegavit.uz/catalog.html">Тўлиқ каталог</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Корхона</h3><ul><li><a href="#about">Биз ҳақимизда</a></li><li><a href="#order">Ҳамкорлик</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Корхона</h3><ul><li><a href="#about">Биз ҳақимизда</a></li><li><a href="https://aksonmegavit.uz/partners.html">Ҳамкорлар учун</a></li></ul></div>
         <div class="span-4 footer__col"><h3>Алоқа</h3><ul><li><a href="tel:+998975840000">97 584 00 00</a></li><li><a href="mailto:aksonmegavit@gmail.com">aksonmegavit@gmail.com</a></li><li>Бухгалтерия: 99 998 20 02</li><li>Андижон вилояти, Андижон шаҳри</li></ul></div>
       </div>
       <div class="footer__legal">
